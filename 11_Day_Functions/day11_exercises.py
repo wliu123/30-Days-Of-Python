@@ -4,8 +4,6 @@
 # Write a function called add_all_nums which takes arbitrary number of arguments and sums all the arguments. Check if all the list items are number types. If not do give a reasonable feedback.
 # Temperature in °C can be converted to °F using this formula: °F = (°C x 9/5) + 32. Write a function which converts °C to °F, convert_celsius_to-fahrenheit.
 # Write a function called check-season, it takes a month parameter and returns the season: Autumn, Winter, Spring or Summer.
-# Write a function called calculate_slope which return the slope of a linear equation
-# Quadratic equation is calculated as follows: ax² + bx + c = 0. Write a function which calculates solution set of a quadratic equation, solve_quadratic_eqn.
 # Declare a function named print_list. It takes a list as a parameter and it prints out each element of the list.
 # Declare a function named reverse_list. It takes an array as a parameter and it returns the reverse of the array (use loops).
 # print(reverse_list([1, 2, 3, 4, 5]))
@@ -47,4 +45,103 @@ def add_all_nums(*args):
 def convert_temp(degrees_celsius):
     fahreinheit = (degrees_celsius * (9/5)) + 32
     return fahreinheit
-print(convert_temp(30))
+def check_season(month):
+    spring = ['March', 'April', 'May']
+    summer = ['June', 'July', 'August']
+    fall = ['September', 'October', 'November']
+    winter = ['December', 'January', 'February']
+    if month in spring:
+        return 'Spring'
+    elif month in summer:
+        return 'Summer'
+    elif month in fall:
+        return 'Fall'
+    elif month in winter:
+        return 'Winter'
+    else:
+        return 'Not in a season'
+def print_list(list):
+    for each in list:
+        print(each)
+def reverse_list(list):
+    new_array = []
+    for i in reversed(range(len(list))):
+        new_array.append(list[i])
+    return new_array
+def capitalize_list_items(list):
+    new_array = []
+    for each in list:
+        new_array.append(each.capitalize())
+    return new_array
+def add_item(list, item):
+    return list.append(item)
+def remove_item(list, item):
+    return list.remove(item)
+def sum_of_numbers(number):
+    sum = 0
+    for i in range(number+1):
+        sum += i
+    return sum
+def sum_of_odds(number):
+    sum = 0
+    for i in range(number+1):
+        if i % 2 != 0:
+            sum += i
+    return sum
+def sum_of_evens(number):
+    sum = 0
+    for i in range(number+1):
+        if i % 2 == 0:
+            sum += i
+    return sum
+
+# Exercises: Level 2
+# Declare a function named evens_and_odds . It takes a positive integer as parameter and it counts number of evens and odds in the number.
+#     print(evens_and_odds(100))
+#     # The number of odds are 50.
+#     # The number of evens are 51.
+# Call your function factorial, it takes a whole number as a parameter and it return a factorial of the number
+# Call your function is_empty, it takes a parameter and it checks if it is empty or not
+# Write different functions which take lists. They should calculate_mean, calculate_median, calculate_mode, calculate_range, calculate_variance, calculate_std (standard deviation).
+
+def evens_and_odds(int):
+    even_count = 0
+    odd_count = 0
+    for i in range(int + 1):
+        if i % 2 == 0:
+            even_count += 1
+        else: 
+            odd_count += 1
+    print('The number of evens are ' + str(even_count))
+    print('The number of odds are ' + str(odd_count))
+
+def factorial(num):
+    sum = 1
+    for i in range(1, num + 1):
+        sum *= i
+    return sum
+
+def factorial_rec(num):
+    if num == 1:
+        return num
+    else: 
+        return num * factorial_rec(num - 1)
+
+def is_empty(param):
+    return len(param) == 0
+
+def calculate_mean(list):
+    sum = 0
+    for each in list:
+        sum += each
+    return sum/len(list)
+
+def calculate_median(list):
+    mid = len(list) // 2
+    list.sort()
+    for i in range(len(list)):
+        if len(list) % 2 != 0:
+            return list[mid]
+        else: 
+            return (list[mid] + list[mid-1])/2
+print(calculate_median([0,2,5,3]))
