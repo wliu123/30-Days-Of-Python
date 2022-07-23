@@ -144,4 +144,17 @@ def calculate_median(list):
             return list[mid]
         else: 
             return (list[mid] + list[mid-1])/2
-print(calculate_median([0,2,5,3]))
+
+def calculate_mode(list):
+   return max(set(list), key = list.count)
+
+def calculate_range(list):
+    return list[len(list) - 1] - list[0]
+
+def calculate_variance(list):
+    mean = calculate_mean(list)
+    sum = 0
+    for each in list:
+        sum += (each - mean)**2
+    return sum/len(list)
+print(calculate_variance([3, 5, 3, 4, 1]))
