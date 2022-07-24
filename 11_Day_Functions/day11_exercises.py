@@ -27,7 +27,7 @@
 # print(sum_all_numbers(100)) # 5050
 # Declare a function named sum_of_odds. It takes a number parameter and it adds all the odd numbers in that range.
 # Declare a function named sum_of_even. It takes a number parameter and it adds all the even numbers in that - range.
-
+import math
 def add_two_numbers(num1, num2):
     return num1 + num2
 def area_of_circle(radius):
@@ -157,4 +157,35 @@ def calculate_variance(list):
     for each in list:
         sum += (each - mean)**2
     return sum/len(list)
-print(calculate_variance([3, 5, 3, 4, 1]))
+
+def calculate_std(list):
+    var = calculate_variance(list)
+    return math.sqrt(var)
+
+# Exercises: Level 3
+# Write a function called is_prime, which checks if a number is prime.
+# Write a functions which checks if all items are unique in the list.
+# Write a function which checks if all the items of the list are of the same data type.
+# Write a function which check if provided variable is a valid python variable
+
+def is_prime(num):
+    if num > 1:
+        for i in range(2, int(num/2) + 1):
+            if (num % 2) == 0:
+                print(str(num) + ' is not a prime number')
+                break
+            else:
+                print(str(num) + ' is a prime number')
+    else: 
+        print(str(num) + ' is a prime number')
+
+def is_unique(list):
+    list_set = set(list)
+    return len(list_set) == len(list)
+
+def same_type(list):
+    return all(isinstance(each, type(list[0])) for each in list[1:])
+
+def is_valid(variable):
+    return variable.isidentifier()
+print(is_valid('1hello'))
