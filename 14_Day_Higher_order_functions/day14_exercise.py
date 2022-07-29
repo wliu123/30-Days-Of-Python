@@ -1,7 +1,7 @@
 countries = ['Estonia', 'Finland', 'Sweden', 'Denmark', 'Norway', 'Iceland']
 names = ['Asabeneh', 'Lidiya', 'Ermias', 'Abraham']
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
+import functools
 # Exercises: Level 1
 # Explain the difference between map, filter, and reduce.
 # map iterates through a list and changes the values within the list. Filter takes in a boolean fxn and iterates through list to see when true. Reduce iterates through list and sums everything.
@@ -31,10 +31,44 @@ for number in numbers:
 # Declare a function called get_string_lists which takes a list as a parameter and then returns a list containing only string items.
 # Use reduce to sum all the numbers in the numbers list.
 # Use reduce to concatenate all the countries and to produce this sentence: Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries
-# Declare a function called categorize_countries that returns a list of countries with some common pattern (you can find the countries list in this repository as countries.js(eg 'land', 'ia', 'island', 'stan')).
-# Create a function returning a dictionary, where keys stand for starting letters of countries and values are the number of country names starting with that letter.
-# Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.js list in the data folder.
-# Declare a get_last_ten_countries function that returns the last ten countries in the countries list.
 
 countries_upper = list(map(lambda x:x.upper(), countries))
-print(countries_upper)
+numbers_square= list(map(lambda x:x**2, numbers))
+names_upper = list(map(lambda x:x.upper(), names))
+
+def filter_land(country):
+    if 'land' in country:
+        return True
+    return False
+country_filter = list(filter(filter_land, countries))
+
+def filter_six(country):
+    if len(country) == 6:
+        return True
+    return False
+country_six = list(filter(filter_six, countries))
+
+def filter_six_or_more(country):
+    if len(country) >= 6:
+        return True
+    return False
+country_six_or_more = list(filter(filter_six_or_more, countries))
+
+def starts_with_e(country):
+    if country.startswith('E'):
+        return True
+    return False
+country_starts_with_e = list(filter(starts_with_e, countries))
+
+def get_string_lists(lists):
+    return str(lists)
+convert_to_string = list(map(get_string_lists, numbers))
+
+def add_two_nums(x, y):
+    return int(x) + int(y)
+sum_list = functools.reduce(add_two_nums, numbers)
+
+def concat_sent(country1, country2):
+    return str(country1) + ", " + str(country2) 
+sentence = functools.reduce(concat_sent, countries)
+print(sentence + " are North European countries")
