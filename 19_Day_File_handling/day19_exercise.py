@@ -24,19 +24,27 @@ count_words("../data/donald_speech.txt")
 count_lines("../data/melina_trump_speech.txt")
 count_words("../data/melina_trump_speech.txt")
 
-with open("../data/countries_data.json") as country:
-    countries_data = country.read()
-    def most_spoken(data):
-        test = json.loads(data)
-        empty = dict()
-        
-        for language in test['languages']:
-            if language in empty:
-                empty[language] += 1
-            else:
-                empty[language] = 0
-        return empty
-    most_spoken(countries_data)
-# countries_data = json.loads("../data/countries_data.json")
-# print(countries_data)
-# def most_spoken(file):
+def most_spoken(file, query):
+    with open(file) as country:
+        countries_data = json.loads(country.read())
+        new_dict = dict()
+        for each in countries_data:
+            for language in each['languages']:
+                if language in new_dict:
+                    new_dict[language] += 1
+                else:
+                    new_dict[language] = 1
+        sort_spoken = sorted(new_dict.items(), key=lambda x:x[1])
+        return sort_spoken[-int(query):]
+print(most_spoken("../data/countries_data.json", 10))
+
+def most_populated(file, query):
+    with open(file) as country:
+        countries_data = json.loads(country.read())
+        sort_pop = sorted(countries_data, key=lambda d:d['population'])
+        new_list = list()
+        for name in sort_pop[-int(query):]:
+            new_list.append(name['name'])
+        return new_list
+
+print(most_populated("../data/countries_data.json", 10))
