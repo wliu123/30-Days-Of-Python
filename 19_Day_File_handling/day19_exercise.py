@@ -4,6 +4,7 @@
 # Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
 #Read the countries_data.json data file in data directory, create a function that creates a list of the ten most populated countries
 import json
+from unittest import skip
 
 def count_lines(file):
     with open(file) as f:
@@ -48,3 +49,18 @@ def most_populated(file, query):
         return new_list
 
 print(most_populated("../data/countries_data.json", 10))
+
+# Exercises: Level 2
+# Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+# Find the most common words in the English language. Call the name of your function find_most_common_words, it will take two parameters - a string or a file and a positive integer, indicating the number of words. Your function will return an array of tuples in descending order. Check the output
+
+def extract_email(file):
+    with open(file) as f:
+        lines = f.read().splitlines()
+        new_list = list()
+        for line in lines:
+            if line.startswith('From'):
+                email = line.split()[1]
+                new_list.append(email)
+        return new_list
+print(extract_email('../data/email_exchanges_big.txt'))
