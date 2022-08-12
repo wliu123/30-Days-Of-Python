@@ -63,4 +63,37 @@ def extract_email(file):
                 email = line.split()[1]
                 new_list.append(email)
         return new_list
-print(extract_email('../data/email_exchanges_big.txt'))
+
+def find_most_common_words(file, num_words):
+    new_dict = dict()
+    with open(file) as f:
+        read_doc = f.read()
+        for word in read_doc:
+            if word in new_dict:
+                new_dict[word] += 1
+            else:
+                new_dict[word] = 1
+        sort_doc = sorted(new_dict.items(), key=lambda x:x[1], reverse=True)
+        return sort_doc[:num_words+1]
+
+# Use the function, find_most_frequent_words to find: a) The ten most frequent words used in Obama's speech b) The ten most frequent words used in Michelle's speech c) The ten most frequent words used in Trump's speech d) The ten most frequent words used in Melina's speech
+# Write a python application that checks similarity between two texts. It takes a file or a string as a parameter and it will evaluate the similarity of the two texts. For instance check the similarity between the transcripts of Michelle's and Melina's speech. You may need a couple of functions, function to clean the text(clean_text), function to remove support words(remove_support_words) and finally to check the similarity(check_text_similarity). List of stop words are in the data directory
+# Find the 10 most repeated words in the romeo_and_juliet.txt
+# Read the hacker news csv file and find out: a) Count the number of lines containing python or Python b) Count the number lines containing JavaScript, javascript or Javascript c) Count the number lines containing Java and not JavaScript
+
+def most_frequent_o(file):
+    new_dict = dict()
+    with open(file) as f:
+        read_file = f.read().lower().split()
+        for word in read_file:
+            if word in new_dict:
+                new_dict[word] += 1
+            else:
+                new_dict[word] = 1
+        sort_word = sorted(new_dict.items(), key=lambda x:x[1], reverse=True)
+        return sort_word[:11]
+print(most_frequent_o('../data/obama_speech.txt'))
+print(most_frequent_o('../data/michelle_obama_speech.txt'))
+print(most_frequent_o('../data/donald_speech.txt'))
+print(most_frequent_o('../data/melina_trump_speech.txt'))
+
