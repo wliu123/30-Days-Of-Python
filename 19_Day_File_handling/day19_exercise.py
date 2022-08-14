@@ -4,7 +4,6 @@
 # Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
 #Read the countries_data.json data file in data directory, create a function that creates a list of the ten most populated countries
 import json
-from unittest import skip
 
 def count_lines(file):
     with open(file) as f:
@@ -97,3 +96,31 @@ print(most_frequent_o('../data/michelle_obama_speech.txt'))
 print(most_frequent_o('../data/donald_speech.txt'))
 print(most_frequent_o('../data/melina_trump_speech.txt'))
 
+import math
+import string
+import sys
+
+def read_file(file):
+    try:
+        with open(file) as f:
+            data = f.read()
+        return data
+    except IOError:
+        print("file not found: ", file)
+        sys.exit()
+
+translation_table = str.maketrans(string.punctuation + string.ascii_uppercase, " "*len(string.punctuation) + string.ascii_lowercase)
+
+def get_words_from_file(text):
+    text = text.translate(translation_table)
+    list_words = text.split()
+    return list_words
+
+def word_freq(list_words):
+    d = dict()
+    for word in list_words:
+        if word in d:
+            d[word] += 1
+        else:
+            d[word] = 1
+    return d
